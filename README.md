@@ -3,10 +3,10 @@ an update to the original blog-flask with new and updated features
 ### setup (Ubuntu)
 * install **python3.7** and **python3.7-venv**
   ```bash
-    $ apt install python3.7
-    $ apt install python3.7-venv
+  $ apt install python3.7
+  $ apt install python3.7-venv
   ```
-* create a virtual environment **venv/**
+* create a virtual environment **venv**
   ```bash
   $ python3 -m venv path/to/new/venv
   ```
@@ -23,6 +23,10 @@ an update to the original blog-flask with new and updated features
    SECRET_KEY='your-secret-key'
    ```
 ### how to run
+* activate the virtual environment with required packages
+  ```bash
+  $ source path/to/new/venv/bin/activate
+  ```
 * run the app
   ```bash
   python blog.py

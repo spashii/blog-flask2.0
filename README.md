@@ -1,5 +1,5 @@
 # blog-flask2.0
-an update to the original blog-flask with new and updated features
+an update(to-be) to the original blog-flask with new and updated features
 ### setup (Ubuntu)
 * install **python3.7** and **python3.7-venv**
   ```bash

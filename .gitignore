@@ -1,4 +1,7 @@
-# python-dotenv
+# database files
+**/*.db
+
+# python-dotenv file
 .flaskenv
 
 # virtual environment

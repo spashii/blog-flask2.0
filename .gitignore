@@ -1,0 +1,9 @@
+# virtual environment
+venv
+
+# vs code stuff
+.vscode
+
+# caches
+**/__pycache__
+**/*.pyc

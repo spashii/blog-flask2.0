@@ -3,12 +3,12 @@ an update(to-be) to the original blog-flask with new and updated features
 ### setup (Ubuntu)
 * install **python3.7** and **python3.7-venv**
   ```bash
-  $ apt install python3.7
+  $ apt install python3.7       # may need to use sudo for these commands
   $ apt install python3.7-venv
   ```
 * create a virtual environment **venv**
   ```bash
-  $ python3 -m venv path/to/new/venv
+  $ python3.7 -m venv path/to/new/venv
   ```
 * activate the virtual environment
   ```bash

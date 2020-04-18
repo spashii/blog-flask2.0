@@ -10,6 +10,10 @@ venv
 # vs code stuff
 .vscode
 
+# logs
+**/*.log
+**/logs
+
 # caches
 **/__pycache__
 **/*.pyc

@@ -22,7 +22,7 @@ class User(db.Model, UserMixin):
     
     def avatar(self, size):
         digest = md5(self.email.encode('utf-8')).hexdigest()
-        return f'https://libravatar.org/avatar/{digest}?d=identicon&s={size}'
+        return f'https://gravatar.com/avatar/{digest}?d=identicon&s={size}'
 
 @login.user_loader
 def load_user(id):

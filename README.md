@@ -21,9 +21,15 @@ an update(to-be) to the original blog-flask with new and updated features
    ```
 * create a _.flaskenv_ file in **blog-flask2.0/** containing
    ```
-   FLASK_APP='blog.py'
-   SECRET_KEY='your-secret-key'
-   ```
+   FLASK_APP=blog.py
+   SECRET_KEY=your-secret-key
+   SQLALCHEMY_DATABASE_URI=sqlite:///your/database/example.db
+   # if you want to use Google  
+   MAIL_SERVER=smtp.googlemail.com
+   MAIL_PORT=587
+   MAIL_USERNAME=example-email@gmail.com
+   MAIL_PASSWORD=example-password
+  ```
 ### how to run
 * activate the virtual environment with required packages
   ```bash

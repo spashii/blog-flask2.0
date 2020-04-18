@@ -36,3 +36,5 @@ an update(to-be) to the original blog-flask with new and updated features
 ### todo
 * update README.md
 * make lower-casing usernames and emails client-side
+* one session per user
+* bug:edit_profile:when entering pre-existing usernames

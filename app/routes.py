@@ -30,9 +30,10 @@ def login():
     form = LoginForm()
     next_page = request.args.get('next')
     if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username_or_email.data).first()
+        username_or_email = form.username_or_email.data.lower()
+        user = User.query.filter_by(username=username_or_email).first()
         if user is None:
-            user = User.query.filter_by(email=form.username_or_email.data).first()
+            user = User.query.filter_by(email=username_or_email).first()
         if user is None or not user.check_password(form.password.data):
             flash('Invalid credentials. Please try again.')
             if not next_page or url_parse(next_page).netloc != '':
@@ -59,8 +60,8 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         user = User()
-        user.username = form.username.data
-        user.email = form.email.data
+        user.username = form.username.data.lower()
+        user.email = form.email.data.lower()
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()

@@ -47,8 +47,13 @@ class EditProfileForm(FlaskForm):
     bio = TextAreaField('About Me', validators=[Length(max=128)])
     submit = SubmitField('Submit')
 
-    # def validate_username(self, username):
-    #     user = User.query.filter(User.username==username.data).first()
-    #     if user:
-    #         if user.username != self.username:
-    #             raise ValidationError('This username already exists.')
+    def __init__(self, original_username, *args, **kwargs):
+        super(EditProfileForm, self).__init__(*args, **kwargs)
+        self.original_username = original_username
+
+    def validate_username(self, username):
+        if username.data != self.original_username:
+            user = User.query.filter_by(username=self.username.data).first()
+            if user is not None:
+                raise ValidationError('This username already exists. Please choose another one.')
+                

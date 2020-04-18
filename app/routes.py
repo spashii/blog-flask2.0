@@ -30,15 +30,14 @@ def login():
     form = LoginForm()
     next_page = request.args.get('next')
     if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
-        # if user entered email? validate
-        # if user is None:
-        #      user = User.query.filter_by(email=form.username.data).first()
+        user = User.query.filter_by(username=form.username_or_email.data).first()
+        if user is None:
+            user = User.query.filter_by(email=form.username_or_email.data).first()
         if user is None or not user.check_password(form.password.data):
             flash('Invalid credentials. Please try again.')
             if not next_page or url_parse(next_page).netloc != '':
                 return redirect(url_for('login'))
-            return redirect(url_for('login'), next=next_page) 
+            return redirect(url_for('login', next=next_page))
         login_user(user, remember=form.remember_me.data)
         flash('You are now logged in.')
         if not next_page or url_parse(next_page).netloc != '':

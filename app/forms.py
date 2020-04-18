@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import (StringField, PasswordField,
-                     BooleanField, SubmitField)
+                     BooleanField, SubmitField, TextAreaField)
 from wtforms.validators import (ValidationError, DataRequired,
                                 Length, Email, EqualTo, Regexp)
 from app.models import User
@@ -16,14 +16,17 @@ class LoginForm(FlaskForm):
         
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[
-                           DataRequired(), Length(min=-1, max=64), Regexp('^[A-Za-z0-9_.]*$',
-                                                                    message='Username can contain only letters, numbers, dots or underscores.')])
+                           DataRequired(), Length(min=-1, max=64),
+                           Regexp('^[A-Za-z0-9_.]*$',
+                           message='Username can contain only letters, numbers, dots or underscores.')])
     email = StringField('Email', validators=[
-                        DataRequired(), Email(), Length(max=128)])
+                        DataRequired(), Length(max=128),
+                        Email()])
     password = PasswordField('Password', validators=[
                              DataRequired(), Length(min=8, max=64)])
     confirm_password = PasswordField('Confirm Password', validators=[
-                                     DataRequired(), EqualTo('confirm_password', message='Passwords do not match.')])
+                                     DataRequired(), EqualTo('confirm_password',
+                                     message='Passwords do not match.')])
     submit = SubmitField('Register')
     
     def validate_username(self, username):
@@ -35,3 +38,17 @@ class RegistrationForm(FlaskForm):
         user = User.query.filter_by(email=email.data.lower()).first()
         if user is not None:
             raise ValidationError('There is an accout associated with this email already.')
+
+class EditProfileForm(FlaskForm):
+    username = StringField('Username', validators=[
+                           DataRequired(), Length(min=-1, max=64),
+                           Regexp('^[A-Za-z0-9_.]*$',
+                           message='Username can contain only letters, numbers, dots or underscores.')])
+    bio = TextAreaField('About Me', validators=[Length(max=128)])
+    submit = SubmitField('Submit')
+
+    # def validate_username(self, username):
+    #     user = User.query.filter(User.username==username.data).first()
+    #     if user:
+    #         if user.username != self.username:
+    #             raise ValidationError('This username already exists.')

@@ -3,7 +3,8 @@ an update(to-be) to the original blog-flask with new and updated features
 ### setup (Ubuntu)
 * install **python3.7** and **python3.7-venv**
   ```bash
-  $ apt install python3.7       # may need to use sudo for these commands
+  # may need to use sudo for these commands
+  $ apt install python3.7       
   $ apt install python3.7-venv
   ```
 * create a virtual environment **venv**
@@ -20,6 +21,7 @@ an update(to-be) to the original blog-flask with new and updated features
    ```
 * create a _.flaskenv_ file in **blog-flask2.0/** containing
    ```
+   FLASK_APP='blog.py'
    SECRET_KEY='your-secret-key'
    ```
 ### how to run
@@ -29,5 +31,8 @@ an update(to-be) to the original blog-flask with new and updated features
   ```
 * run the app
   ```bash
-  python blog.py
+  flask run
   ```
+### todo
+* update README.md
+* make lower-casing usernames and emails client-side

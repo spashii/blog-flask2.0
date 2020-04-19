@@ -92,7 +92,7 @@ def edit_profile():
         flash('Your changes have been saved.')
         return redirect(url_for('edit_profile'))
     elif request.method == 'GET':
-        form.username.data = current_user.username
+        form.username.data = current_user.username.lower()
         form.bio.data = current_user.bio
     return render_template('edit_profile.html', title='Edit Profile', form=form)
 

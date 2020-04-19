@@ -62,4 +62,16 @@ class PostForm(FlaskForm):
         DataRequired(), Length(min=1, max=256)])
     submit = SubmitField('Submit')
 
-                
+class ResetPasswordRequestForm(FlaskForm):
+    email = StringField('Email', validators=[
+        DataRequired(), Length(max=128),
+        Email()])
+    submit = SubmitField('Submit')
+
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField('Password', validators=[
+        DataRequired(), Length(min=8, max=64)])
+    confirm_password = PasswordField('Confirm Password', validators=[
+        DataRequired(), EqualTo('confirm_password',
+                                message='Passwords do not match.')])
+    submit = SubmitField('Request Password Reset')

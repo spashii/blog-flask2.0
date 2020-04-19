@@ -1,9 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {% if current_user.is_authenticated %}
-        <h1>Hi, {{ current_user.username }}</h1>
-    {% endif %}
+    <h1>Hi, {{ current_user.username }}</h1>
+    <form action="" method="POST">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.post.label }}<br>
+            {{ form.post(cols="42", rows="3") }}<br>
+            {% for error in form.post.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit }}</p>
+    </form>
+
     {% for post in posts %}
         <div><p>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div>
     {% endfor %}

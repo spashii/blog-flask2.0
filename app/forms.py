@@ -8,25 +8,25 @@ from app.models import User
 
 class LoginForm(FlaskForm):
     username_or_email = StringField('Username or Email', validators=[
-                           DataRequired(), Length(max=64)])
+        DataRequired(), Length(max=64)])
     password = PasswordField('Password', validators=[
-                             DataRequired()])
+        DataRequired()])
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
         
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[
-                           DataRequired(), Length(min=-1, max=64),
-                           Regexp('^[A-Za-z0-9_.]*$',
-                           message='Username can contain only letters, numbers, dots or underscores.')])
+        DataRequired(), Length(min=-1, max=64),
+        Regexp('^[A-Za-z0-9_.]*$',
+            message='Username can contain only letters, numbers, dots or underscores.')])
     email = StringField('Email', validators=[
-                        DataRequired(), Length(max=128),
-                        Email()])
+        DataRequired(), Length(max=128),
+        Email()])
     password = PasswordField('Password', validators=[
-                             DataRequired(), Length(min=8, max=64)])
+        DataRequired(), Length(min=8, max=64)])
     confirm_password = PasswordField('Confirm Password', validators=[
-                                     DataRequired(), EqualTo('confirm_password',
-                                     message='Passwords do not match.')])
+        DataRequired(), EqualTo('confirm_password',
+            message='Passwords do not match.')])
     submit = SubmitField('Register')
     
     def validate_username(self, username):
@@ -41,9 +41,9 @@ class RegistrationForm(FlaskForm):
 
 class EditProfileForm(FlaskForm):
     username = StringField('Username', validators=[
-                           DataRequired(), Length(min=-1, max=64),
-                           Regexp('^[A-Za-z0-9_.]*$',
-                           message='Username can contain only letters, numbers, dots or underscores.')])
+        DataRequired(), Length(min=-1, max=64),
+        Regexp('^[A-Za-z0-9_.]*$',
+            message='Username can contain only letters, numbers, dots or underscores.')])
     bio = TextAreaField('About Me', validators=[Length(max=128)])
     submit = SubmitField('Submit')
 
@@ -56,4 +56,10 @@ class EditProfileForm(FlaskForm):
             user = User.query.filter_by(username=self.username.data).first()
             if user is not None:
                 raise ValidationError('This username already exists. Please choose another one.')
+
+class PostForm(FlaskForm):
+    post = TextAreaField('Say something', validators=[
+        DataRequired(), Length(min=1, max=256)])
+    submit = SubmitField('Submit')
+
                 

@@ -1,7 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, EditProfileForm
-from app.models import User
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm
+from app.models import User, Post
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from datetime import datetime
@@ -17,6 +17,13 @@ def before_request():
 @app.route('/home')
 @login_required
 def index():
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(body=form.post.data, author=current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Successfully posted!')
+        return redirect(url_for('index'))
     posts = [
         {
             'author': {'username': 'John'},
@@ -66,9 +73,8 @@ def register():
         return redirect(url_for('index'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User()
-        user.username = form.username.data.lower()
-        user.email = form.email.data.lower()
+        user = User(username=form.username.data.lower(),
+                    email=form.email.data.lower())
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()

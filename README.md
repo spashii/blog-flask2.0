@@ -2,10 +2,11 @@
 an update(to-be) to the original blog-flask with new and updated features
 * the homepage now has posts from followed users only
 * users need to login to see the homepage
+* users can post straight from the homepage
 * users can now follow and unfollow other users
 * users get a cool unique profile picture by default(change through gravatar)
 * posts no longer have a title field
-### setup (Ubuntu)
+### setup (Ubuntu) //incomplete
 * install **python3.7** and **python3.7-venv**
   ```bash
   # may need to use sudo for these commands
@@ -46,6 +47,8 @@ an update(to-be) to the original blog-flask with new and updated features
   ```
 ### todo
 * update README.md
+* add database setup instructions
 * make lower-casing usernames and emails client-side
 * one session per user
 * ~bug:edit_profile:when entering pre-existing usernames~
+* post/redirect/get everything

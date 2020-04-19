@@ -26,6 +26,33 @@ class User(db.Model, UserMixin):
         digest = md5(self.email.encode('utf-8')).hexdigest()
         return f'https://gravatar.com/avatar/{digest}?d=identicon&s={size}'
 
+    followers = db.Table(
+        'followers',
+        db.Column('follower_id', db.Integer, db.ForeignKey('user.id')),
+        db.Column('followed_id', db.Integer, db.ForeignKey('user.id'))
+    )
+    followed = db.relationship(
+        'User',
+        secondary=followers,
+        primaryjoin=(followers.c.follower_id == id),
+        secondaryjoin=(followers.c.followed_id == id),
+        backref=db.backref('followers', lazy='dynamic'),
+        lazy='dynamic'
+    )
+
+    def is_following(self, user):
+        return self.followed.fliter(
+            followers.c.followed_id == user.id
+        ).count() > 0
+
+    def follow(self, user):
+        if not self.is_following(user):
+            self.followed.append(user)
+    
+    def unfollow(self, user):
+        if self.is_following(user):
+            self.followed.remove(user)
+
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))

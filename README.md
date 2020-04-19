@@ -1,5 +1,10 @@
 # blog-flask2.0
 an update(to-be) to the original blog-flask with new and updated features
+* the homepage now has posts from followed users only
+* users need to login to see the homepage
+* users can now follow and unfollow other users
+* users get a cool unique profile picture by default(change through gravatar)
+* posts no longer have a title field
 ### setup (Ubuntu)
 * install **python3.7** and **python3.7-venv**
   ```bash

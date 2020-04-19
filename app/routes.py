@@ -86,7 +86,7 @@ def user(username):
 def edit_profile():
     form = EditProfileForm(current_user.username)
     if form.validate_on_submit():
-        current_user.username = form.username.data
+        current_user.username = form.username.data.lower()
         current_user.bio = form.bio.data
         db.session.commit()
         flash('Your changes have been saved.')

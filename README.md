@@ -1,5 +1,6 @@
 # blog-flask2.0
 an update(to-be) to the original blog-flask with new and updated features
+* all new explore page
 * the homepage now has posts from followed users only
 * users need to login to see the homepage
 * users can post straight from the homepage

@@ -2,7 +2,7 @@
 
 {% block content %}
     <h1>Hi, {{ current_user.username }}</h1>
-    {% if posts %}
+    {% if posts.items %}
         {% for post in posts.items %}
             {% include '_post.html' %}
         {% endfor %}
@@ -13,6 +13,6 @@
             <a href="{{ url_for('explore', page=posts.next_num) }}">Older Posts</a>
         {% endif %}
     {% else %}
-        <p>Nobody has posted anything yet. Click <a href="{{ url_for('home') }}"> here </a>to post something yourself.</p>
+        <p>Click <a href="{{ url_for('index') }}"> here </a>to post something yourself.</p>
     {% endif %}
 {% endblock %}

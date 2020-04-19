@@ -13,7 +13,7 @@
         </p>
         <p>{{ form.submit }}</p>
     </form>
-    {% if posts %}
+    {% if posts.items %}
         {% for post in posts.items %}
             {% include '_post.html' %}
         {% endfor %}
@@ -24,7 +24,7 @@
             <a href="{{ url_for('index', page=posts.next_num) }}">Older Posts</a>
         {% endif %}
     {% else %}
-        <p>None of your followers have posted anything. You can find new users to follow 
+        <p>You can find new users to follow 
             <a href="{{ url_for('explore') }}"> here.</a></p>
         <p>Or, you can try to post something yourself!</p>
     {% endif %}

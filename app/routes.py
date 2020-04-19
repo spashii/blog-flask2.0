@@ -79,7 +79,8 @@ def register():
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    posts = user.posts.order_by(Post.timestamp.desc()).all()
+    page = request.args.get('page', default=1, type=int)
+    posts = user.posts.order_by(Post.timestamp.desc()).paginate(page, app.config['POSTS_PER_PAGE'], False)
     return render_template('user.html', user=user, posts=posts)
 
 @app.route('/edit_profile', methods=['GET', 'POST'])

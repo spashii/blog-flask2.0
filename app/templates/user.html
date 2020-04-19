@@ -27,7 +27,15 @@
         <p><a href="{{ url_for('unfollow', username=user.username) }}">Unfollow</a></p>
     {% endif %}
     <hr>
-    {% for post in posts %}
-        {% include '_post.html' %}
-    {% endfor %}
+    {% if posts.items %}
+        {% for post in posts.items %}
+            {% include '_post.html' %}
+        {% endfor %}
+        {% if posts.has_prev %}
+            <a href="{{ url_for('user', username=user.username, page=posts.prev_num) }}">Newer Posts</a>
+        {% endif %}
+        {% if posts.has_next %}
+            <a href="{{ url_for('user', username=user.username, page=posts.next_num) }}">Older Posts</a>
+        {% endif %}
+    {% endif %}
 {% endblock %}

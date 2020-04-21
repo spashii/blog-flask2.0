@@ -2,6 +2,7 @@
 
 {% block content %}
     <h1>Hi, {{ current_user.username }}</h1>
+    {% if form %}
     <form action="" method="POST">
         {{ form.hidden_tag() }}
         <p>
@@ -13,19 +14,14 @@
         </p>
         <p>{{ form.submit }}</p>
     </form>
-    {% if posts.items %}
-        {% for post in posts.items %}
-            {% include '_post.html' %}
-        {% endfor %}
-        {% if posts.has_prev %}
-            <a href="{{ url_for('index', page=posts.prev_num) }}">Newer Posts</a>
-        {% endif %}
-        {% if posts.has_next %}
-            <a href="{{ url_for('index', page=posts.next_num) }}">Older Posts</a>
-        {% endif %}
-    {% else %}
-        <p>You can find new users to follow 
-            <a href="{{ url_for('explore') }}"> here.</a></p>
-        <p>Or, you can try to post something yourself!</p>
+    {% endif %}
+    {% for post in posts %}
+    {% include '_post.html' %}
+    {% endfor %}
+    {% if prev_url %}
+    <a href="{{ prev_url }}">Newer posts</a>
+    {% endif %}
+    {% if next_url %}
+    <a href="{{ next_url }}">Older posts</a>
     {% endif %}
 {% endblock %}
